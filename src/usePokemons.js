@@ -5,7 +5,7 @@ export default function usePokemons() {
   const [pokemons, setPokemons] = useState([]);
   const POSSIBLE_POKEMONS = 1025;
 
-  const getPokemon = async (id, shiny) => {
+  const getPokemon = async ({ id, shiny }) => {
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
     const { name, sprites } = await res.json();
     const image = sprites[shiny ? "front_shiny" : "front_default"];
@@ -46,6 +46,5 @@ export default function usePokemons() {
     }
     setPokemons(shufflePokemons());
   }
-
   return { pokemons, getRandomPokemons, shufflePokemons, setPokemons };
 }
