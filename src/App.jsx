@@ -8,13 +8,19 @@ function App() {
     usePokemons();
   useEffect(() => {
     async function fetchData() {
-      setPokemons(await getRandomPokemons(5));
+      setPokemons(await getRandomPokemons(10));
     }
     fetchData();
   }, []);
+
+  function handleCardClick(index) {
+    console.log(index);
+    shufflePokemons();
+  }
+
   return (
     <div className="App">
-      <Main cards={pokemons} />
+      <Main cards={pokemons} onClick={handleCardClick} />
     </div>
   );
 }

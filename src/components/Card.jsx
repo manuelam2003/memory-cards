@@ -1,25 +1,22 @@
+import { useState } from "react";
 import "../styles/Card.css";
-import cardBack from "../assets/card-back.png";
-function Card({ card }) {
+
+function Card({ card, onClick }) {
+  const [isClicked, setIsClicked] = useState(false);
+
+  // const handleClick = () => {
+  //   if (isClicked) {
+  //     console.log("already clicked");
+  //   } else {
+  //     setIsClicked(true);
+  //     console.log("not clicked yet");
+  //   }
+  // };
   return (
-    <div className="card-inner">
-      <div className="card-front">
-        <button className="card" data-shiny={card.shiny}>
-          {card.shiny && <div className="shiny-symbol" />}
-          <img
-            src={card.image}
-            alt={card.name}
-            className="card-image"
-            draggable="false"
-          />
-          <p className="card-name">
-            <span className="name">{card.name}</span>
-          </p>
-        </button>
-      </div>
-      {/* <div className="card-back">
-        <img src={cardBack} alt="pokemon card back" className="back" />
-      </div> */}
+    <div className="card-container">
+      <button className="card" data-shiny={card.shiny} onClick={onClick}>
+        <img src={card.image} alt={card.name} className="card-image" />
+      </button>
     </div>
   );
 }

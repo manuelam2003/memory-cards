@@ -44,7 +44,7 @@ export default function usePokemons() {
       shuffledPokemons.push(card);
       availableCards.splice(index, 1);
     }
-    setPokemons(shufflePokemons());
+    setPokemons(shuffledPokemons);
   }
   return { pokemons, getRandomPokemons, shufflePokemons, setPokemons };
 }

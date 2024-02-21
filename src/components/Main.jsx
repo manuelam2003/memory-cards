@@ -1,12 +1,12 @@
 import Card from "./Card";
 import "../styles/Main.css";
 
-function Main({ cards }) {
+function Main({ cards, onClick }) {
   return (
     <main>
       <div className="cards">
-        {cards.map((card) => (
-          <Card key={card.id} card={card} />
+        {cards.map((card, index) => (
+          <Card key={card.id} card={card} onClick={() => onClick(index)} />
         ))}
       </div>
     </main>
