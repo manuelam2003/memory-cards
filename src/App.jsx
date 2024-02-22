@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./App.css";
 import usePokemons from "./usePokemons";
 import Main from "./components/Main";
@@ -13,12 +14,6 @@ function App() {
   );
   const [gameStatus, setGameStatus] = useState("start");
   const [amount, setAmount] = useState(3);
-  // let amount = 3;
-
-  async function fetchData(cant) {
-    // console.log(amount);
-    setPokemons(await getRandomPokemons(cant));
-  }
 
   function incrementScore() {
     const incrementedScore = currentScore + 1;
@@ -28,6 +23,11 @@ function App() {
 
     localStorage.setItem("best-score", newBestScore);
   }
+
+  async function fetchData(cant) {
+    setPokemons(await getRandomPokemons(cant));
+  }
+
   useEffect(() => {
     fetchData(3);
     setCurrentScore(0);
@@ -35,21 +35,15 @@ function App() {
 
   useEffect(() => {
     if (gameStatus !== "start") {
-      setCurrentScore(0);
       handleLevelUp();
       setGameStatus("start");
     }
   }, [gameStatus]);
 
   function handleLevelUp() {
-    if (gameStatus === "win") {
-      const nextAmount = amount + 2;
-      setAmount(amount + 2);
-      fetchData(nextAmount);
-    } else if (gameStatus === "lose") {
-      setAmount(3);
-      fetchData(3);
-    }
+    const nextAmount = gameStatus === "win" ? amount + 2 : 3;
+    setAmount(nextAmount);
+    fetchData(nextAmount);
     setCurrentScore(0);
   }
 
@@ -63,7 +57,6 @@ function App() {
     const card = pokemons[index];
     if (card.isClicked) {
       setGameStatus("lose");
-      // setTimeout(() => {}, 1000);
       return;
     }
     updateCardsClicked(index);
